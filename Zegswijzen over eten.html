@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="nl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zegswijzen over eten</title>
+<style>
+:root{--bg:#f6f3ee;--card:#fff;--ink:#2b2a33;--mute:#6b6a75;--brand:#2f6f73;--brandt:#fff;--ok:#dff1e2;--okb:#3f8f55;--bad:#fbe3dc;--line:#d9d4ca;--hl:#fff6d6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e1f24;--card:#2a2b32;--ink:#f1efe9;--mute:#b0aeb8;--brand:#6fb7bb;--brandt:#14272a;--ok:#223a2a;--okb:#6fc58a;--bad:#472a24;--line:#43444d;--hl:#3b3720}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:22px/1.4 system-ui,"Segoe UI",Arial,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:16px}
+h1{font-size:28px;margin:8px 0 12px}
+nav{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+nav button{flex:1;min-width:150px;font:inherit;font-weight:600;padding:14px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+nav button.on{background:var(--brand);color:var(--brandt);border-color:var(--brand)}
+.help{background:var(--hl);border-radius:14px;padding:12px 16px;margin-bottom:16px;display:flex;gap:12px;align-items:center}
+.cols{display:grid;grid-template-columns:1fr 1.3fr 1.3fr;gap:16px}
+@media(max-width:800px){.cols{grid-template-columns:1fr}}
+.col h2{font-size:18px;color:var(--mute);margin:0 0 8px;text-transform:uppercase;letter-spacing:.04em}
+.card{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px;display:flex;gap:12px;align-items:center;touch-action:none;user-select:none;-webkit-user-select:none}
+.photo{flex-direction:column;text-align:center;cursor:grab}
+.photo .pic{width:100%;height:110px;border-radius:12px;background:var(--hl);display:flex;align-items:center;justify-content:center;font-size:64px;overflow:hidden}
+.pic img{width:100%;height:100%;object-fit:cover}
+.bund{border-color:var(--brand);border-style:dashed;cursor:grab}
+.bund .pic{width:64px;height:64px;font-size:38px;flex:none;border-radius:10px;background:var(--hl);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.ok{background:var(--ok);border-color:var(--okb);border-style:solid;cursor:default}
+.card .txt{flex:1}
+.sp{flex:none;width:48px;height:48px;border-radius:50%;border:2px solid var(--brand);background:var(--card);color:var(--brand);font-size:22px;cursor:pointer}
+.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 8px 24px rgba(0,0,0,.25);margin:0}
+.lift{opacity:.35}
+.over{outline:3px solid var(--brand)}
+.shake{animation:sh .35s;background:var(--bad)}
+@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+#msg{min-height:34px;font-weight:600;margin:4px 0 12px}
+.ex{background:var(--card);border:2px solid var(--okb);border-radius:16px;padding:16px;margin-top:8px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.ex .film{width:200px;height:120px;border-radius:12px;background:var(--hl);display:flex;align-items:center;justify-content:center;font-size:64px;overflow:hidden}
+.ex video{width:100%;height:100%}
+.big{font:inherit;font-weight:700;padding:14px 26px;border-radius:14px;border:0;background:var(--brand);color:var(--brandt);cursor:pointer;margin:6px 6px 6px 0}
+.big.alt{background:var(--card);color:var(--brand);border:2px solid var(--brand)}
+.stage{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:24px;text-align:center}
+.stage .zin{font-size:32px;font-weight:700;margin:12px 0}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+@media(max-width:600px){.opts{grid-template-columns:1fr}}
+.opt{font:inherit;background:var(--card);color:var(--ink);border:2px solid var(--line);border-radius:16px;padding:12px;cursor:pointer}
+.opt .pic{height:100px;font-size:56px;display:flex;align-items:center;justify-content:center;background:var(--hl);border-radius:10px;margin-bottom:6px;overflow:hidden}
+.opt.good{background:var(--ok);border-color:var(--okb)}.opt.no{background:var(--bad)}
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}@media(max-width:600px){.mem{grid-template-columns:repeat(3,1fr)}}
+.mc{font:inherit;min-height:130px;border-radius:16px;border:2px solid var(--line);background:var(--card);color:var(--ink);font-size:34px;cursor:pointer;padding:8px}.mc.ok{background:var(--ok);border-color:var(--okb)}.mc .pic{font-size:64px;display:block}.mc img{width:100%;height:110px;object-fit:cover;border-radius:8px}
+</style></head><body><main>
+<h1>🍲 Zegswijzen over eten</h1>
+<nav id="nav"></nav>
+<div id="app"></div>
+</main>
+<script>
+// Voeg eigen foto's/filmpjes toe: img (data:-adres) en vid (data:-adres) per zegswijze.
+const D=[
+{e:'🍐',n:'de peer',z:'Met de gebakken peren blijven zitten',m:'Je krijgt het probleem. Een ander is weg.',v:'Mijn collega is weg. Nu moet ik alle werk doen. Ik blijf met de gebakken peren zitten.'},
+{e:'🤤',n:'de lege maag',z:'Rammelen van de honger',m:'Je hebt heel veel honger.',v:'Ik heb niet gegeten. Mijn maag rammelt van de honger.'},
+{e:'🍲',n:'de pot',z:'Eten wat de pot schaft',m:'Je eet wat er is. Je kiest niet.',v:'Bij mijn oma eten we wat de pot schaft.'},
+{e:'🍞',n:'het droge brood',z:'Hij moet droog brood eten',m:'Hij heeft heel weinig geld.',v:'Hij heeft geen werk meer. Hij moet droog brood eten.'},
+{e:'🥣',n:'de soep',z:'De soep wordt nooit zo gegeten als ze wordt opgediend',m:'Een probleem is minder erg dan je denkt.',v:'Je bent bang voor het examen. Rustig maar. De soep wordt nooit zo gegeten als ze wordt opgediend.'},
+{e:'🥖',n:'het brood',z:'De een zijn dood is de ander zijn brood',m:'Slecht voor de een is goed voor de ander.',v:'De winkel sluit. De andere winkel krijgt meer klanten. De een zijn dood is de ander zijn brood.'},
+{e:'🥓',n:'spek en bonen',z:'Voor spek en bonen meedoen',m:'Je doet mee, maar je krijgt niets.',v:'Ik help de hele dag, maar ik krijg niets. Ik doe voor spek en bonen mee.'},
+{e:'🍒',n:'de kers',z:'De kers op de taart',m:'Het laatste mooie extraatje.',v:'Wij hebben gewonnen. En we krijgen nog een reis. Dat is de kers op de taart.'},
+{e:'🧂',n:'het zout',z:'Iets met een korreltje zout nemen',m:'Je gelooft het niet helemaal.',v:'Hij zegt dat hij rijk is. Ik neem dat met een korreltje zout.'},
+{e:'🍎',n:'de appel',z:'Een appeltje voor de dorst bewaren',m:'Je spaart geld voor slechte tijden.',v:'Ik spaar elke maand wat geld. Ik bewaar een appeltje voor de dorst.'}
+];
+const $=s=>document.querySelector(s),shuf=a=>[...a].sort(()=>Math.random()-.5);
+let voice=null;const pick=()=>{voice=speechSynthesis.getVoices().find(v=>/^nl[-_]BE/i.test(v.lang))||speechSynthesis.getVoices().find(v=>/^nl/i.test(v.lang))};
+if('speechSynthesis'in window){pick();speechSynthesis.onvoiceschanged=pick}
+function speak(t){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='nl-BE';if(voice)u.voice=voice;u.rate=.8;speechSynthesis.speak(u)}
+const pic=i=>D[i].img?`<img src="${D[i].img}" alt="">`:D[i].e;
+const sp=t=>`<button class="sp" data-say="${t}" aria-label="Luister">🔊</button>`;
+function wire(root){root.querySelectorAll('.sp').forEach(b=>{b.onclick=e=>{e.stopPropagation();speak(b.dataset.say)}});
+ root.querySelectorAll('[data-hear]').forEach(c=>c.onpointerenter=e=>{if(e.pointerType==='mouse')speak(c.dataset.hear)})}
+function drag(el,drop){el.onpointerdown=ev=>{ev.preventDefault();speak(el.dataset.hear);const g=el.cloneNode(true);g.classList.add('ghost');document.body.appendChild(g);
+ const w=el.getBoundingClientRect(),ox=ev.clientX-w.left,oy=ev.clientY-w.top;g.style.width=w.width+'px';el.classList.add('lift');
+ const mv=e=>{g.style.left=e.clientX-ox+'px';g.style.top=e.clientY-oy+'px';document.querySelectorAll('.over').forEach(x=>x.classList.remove('over'));const z=document.elementFromPoint(e.clientX,e.clientY)?.closest('[data-drop]');if(z)z.classList.add('over')};mv(ev);
+ const up=e=>{removeEventListener('pointermove',mv);removeEventListener('pointerup',up);g.remove();el.classList.remove('lift');document.querySelectorAll('.over').forEach(x=>x.classList.remove('over'));
+  const z=document.elementFromPoint(e.clientX,e.clientY)?.closest('[data-drop]');if(z)drop(z)};
+ addEventListener('pointermove',mv);addEventListener('pointerup',up)}}
+const msg=(t,bad,el)=>{$('#msg').textContent=t;if(bad&&el){el.classList.add('shake');setTimeout(()=>el.classList.remove('shake'),400)}};
+
+/* ---------- 1. KOPPELEN ---------- */
+let ri=0,R,d1,d2,ex;
+const chunks=[[0,1,2,3],[4,5,6],[7,8,9]];
+function newRound(){const c=chunks[ri];R={photos:shuf(c),phr:shuf(c),mean:shuf(c)};d1={};d2={};ex=null}
+function koppel(){
+ const c=chunks[ri],all=c.every(i=>d2[i]);
+ $('#app').innerHTML=`<div class="help">${sp('Sleep de foto naar de zegswijze. Sleep daarna de zegswijze naar de betekenis.')}<div><b>1.</b> Sleep de foto naar de zegswijze.<br><b>2.</b> Sleep dan naar de betekenis.</div></div><div id="msg">Ronde ${ri+1} van ${chunks.length}</div>
+ <div class="cols">
+ <div class="col"><h2>Foto</h2>${R.photos.filter(i=>!d1[i]).map(i=>`<div class="card photo" data-kind="photo" data-id="${i}" data-hear="${D[i].n}"><div class="pic">${pic(i)}</div><div>${D[i].n}</div></div>`).join('')||'<p>✔ Klaar</p>'}</div>
+ <div class="col"><h2>Zegswijze</h2>${R.phr.map(i=>d2[i]?`<div class="card ok" data-hear="${D[i].z}"><div class="txt">✔ ${D[i].z}</div>${sp(D[i].z)}</div>`:d1[i]?`<div class="card bund" data-kind="bund" data-id="${i}" data-hear="${D[i].z}"><div class="pic">${pic(i)}</div><div class="txt">${D[i].z}</div></div>`:`<div class="card" data-drop="p" data-id="${i}" data-hear="${D[i].z}"><div class="txt">${D[i].z}</div>${sp(D[i].z)}</div>`).join('')}</div>
+ <div class="col"><h2>Betekenis</h2>${R.mean.map(i=>`<div class="card ${d2[i]?'ok':''}" data-drop="m" data-id="${i}" data-hear="${D[i].m}"><div class="txt">${D[i].m}</div>${sp(D[i].m)}</div>`).join('')}</div></div>
+ ${ex!==null?`<div class="ex"><div class="film">${D[ex].vid?`<video src="${D[ex].vid}" controls></video>`:pic(ex)}</div><div style="flex:1;min-width:220px"><b>Voorbeeld</b><p>${D[ex].v}</p></div>${sp(D[ex].v)}</div>`:''}
+ ${all?`<p><b>🎉 Goed gedaan!</b></p><button class="big" id="nx">${ri<chunks.length-1?'Volgende ronde ➜':'Opnieuw beginnen'}</button>`:''}`;
+ wire($('#app'));
+ document.querySelectorAll('[data-kind="photo"]').forEach(el=>drag(el,z=>{if(z.dataset.drop!=='p')return msg('Sleep de foto naar een zegswijze.',1,z);
+  if(z.dataset.id===el.dataset.id){d1[el.dataset.id]=1;koppel();msg('Goed! Sleep nu naar de betekenis.');speak('Goed!')}else{msg('Nee, probeer nog eens.',1,z);speak('Probeer nog eens')}}));
+ document.querySelectorAll('[data-kind="bund"]').forEach(el=>drag(el,z=>{if(z.dataset.drop!=='m')return msg('Sleep naar een betekenis.',1,z);
+  if(z.dataset.id===el.dataset.id){const i=+el.dataset.id;d2[i]=1;ex=i;koppel();msg('Heel goed! Kijk naar het voorbeeld.');speak(D[i].v)}else{msg('Nee, probeer nog eens.',1,z);speak('Probeer nog eens')}}));
+ const nx=$('#nx');if(nx)nx.onclick=()=>{ri=(ri+1)%chunks.length;newRound();koppel()}}
+
+/* ---------- 2. LUISTEREN ---------- */
+let li=0;
+function luister(){const i=li%D.length,o=shuf([i,...shuf(D.map((_,k)=>k).filter(k=>k!==i)).slice(0,2)]);
+ $('#app').innerHTML=`<div class="stage"><p>Luister naar de zegswijze. Tik op de juiste betekenis.</p><div class="zin">${D[i].z}</div><button class="big" id="pl">🔊 Luister</button><div style="display:grid;gap:12px;margin-top:16px">${o.map(k=>`<div class="card opt" style="touch-action:auto;cursor:pointer;text-align:left;margin:0" data-k="${k}" data-hear="${D[k].m}"><div class="txt">${D[k].m}</div>${sp(D[k].m)}</div>`).join('')}</div><div id="msg"></div></div>`;
+ wire($('#app'));$('#pl').onclick=()=>speak(D[i].z);setTimeout(()=>speak(D[i].z),300);
+ document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(+b.dataset.k===i){b.classList.add('good');msg('Goed zo! '+D[i].m);speak('Goed zo! '+D[i].m);$('#app').firstChild.insertAdjacentHTML('beforeend','<button class="big" id="nx">Volgende ➜</button>');$('#nx').onclick=()=>{li++;luister()}}else{b.classList.add('no');msg('Probeer nog eens.');speak('Probeer nog eens')}})}
+
+/* ---------- 3. NAZEGGEN ---------- */
+let si=0,tries=0;
+const norm=s=>s.toLowerCase().replace(/[^a-zà-ÿ ]/g,'').split(/\s+/).filter(Boolean);
+function nazeg(){const t=D[si%D.length].z,SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ $('#app').innerHTML=`<div class="stage"><p>1. Luister. 2. Zeg het na.</p><div class="zin">${t}</div><button class="big alt" id="pl">🔊 Luister</button><button class="big" id="mic">🎤 Zeg het na</button><div id="msg"></div><div id="nxw"></div></div>`;
+ $('#pl').onclick=()=>speak(t);setTimeout(()=>speak(t),300);
+ if(!SR){msg('Spreken werkt niet in deze browser. Gebruik Chrome of Safari.');return}
+ $('#mic').onclick=()=>{speechSynthesis.cancel();const r=new SR();r.lang='nl-BE';r.interimResults=false;r.maxAlternatives=3;msg('🎤 Ik luister…');
+  r.onresult=e=>{const want=norm(t);let best=0,heard='';for(const a of e.results[0]){const h=norm(a.transcript),n=want.filter(w=>h.includes(w)).length/want.length;if(n>=best){best=n;heard=a.transcript}}
+   if(best>=.75){msg('✅ Goed gesproken!');speak('Goed gesproken!');tries=0;$('#nxw').innerHTML='<button class="big" id="nx">Volgende ➜</button>';$('#nx').onclick=()=>{si++;nazeg()}}
+   else{tries++;msg('Bijna. Ik hoorde: “'+heard+'”. Probeer nog eens.');setTimeout(()=>speak(t),400);if(tries>=3){$('#nxw').innerHTML='<button class="big alt" id="nx">Sla over ➜</button>';$('#nx').onclick=()=>{si++;tries=0;nazeg()}}}};
+  r.onerror=()=>msg('Ik hoor niets. Controleer de microfoon en probeer nog eens.');r.onnomatch=()=>msg('Probeer nog eens.');
+  try{r.start()}catch(_){}}}
+
+/* ---------- 4. MEMORY ---------- */
+let mem;
+function memory(){const c=shuf(D.map((_,k)=>k)).slice(0,6);mem={cards:shuf(c.flatMap(k=>[{k,t:'z'},{k,t:'f'}])),up:[],lock:0,n:0};drawMem()}
+function drawMem(m){
+ $('#app').innerHTML=`<div class="help">${sp('Draai twee kaarten om. Zoek de foto en de zegswijze die bij elkaar horen.')}<div>Draai twee kaarten om.<br>Zoek de foto en de zegswijze die bij elkaar horen.</div></div><div id="msg">${m||''}</div><div class="mem">${mem.cards.map((c,j)=>{const open=c.done||mem.up.includes(j);return `<button class="mc ${c.done?'ok':''}" data-j="${j}">${open?(c.t==='z'?`<span style="font-size:19px">${D[c.k].z}</span>`:`<span class="pic">${pic(c.k)}</span>`):'❓'}</button>`}).join('')}</div>${mem.n===6?'<button class="big" id="nx">Opnieuw ➜</button>':''}`;
+ wire($('#app'));const nx=$('#nx');if(nx)nx.onclick=memory;
+ document.querySelectorAll('.mc').forEach(b=>b.onclick=()=>{const j=+b.dataset.j,c=mem.cards[j];if(mem.lock||c.done||mem.up.includes(j))return;
+  mem.up.push(j);speak(c.t==='z'?D[c.k].z:D[c.k].n);
+  if(mem.up.length<2)return drawMem();
+  const [a,b2]=mem.up;
+  if(mem.cards[a].k===mem.cards[b2].k){mem.cards[a].done=mem.cards[b2].done=1;mem.n++;mem.up=[];drawMem(mem.n===6?'🎉 Alle paren gevonden!':'✅ Goed! Dat hoort bij elkaar.')}
+  else{mem.lock=1;drawMem('Niet hetzelfde. Probeer nog eens.');setTimeout(()=>{mem.up=[];mem.lock=0;drawMem()},1500)}})}
+
+/* ---------- 5. JUIST OF FOUT ---------- */
+function juist(){const all=D.map((_,k)=>k),i=shuf(all)[0],ok=Math.random()<.5,m=ok?i:shuf(all.filter(k=>k!==i))[0];
+ $('#app').innerHTML=`<div class="stage"><p>Luister. Past de betekenis bij de zegswijze?</p><div class="zin">${D[i].z} ${sp(D[i].z)}</div><div class="card" style="justify-content:center;touch-action:auto" data-hear="${D[m].m}"><div class="txt">${D[m].m}</div>${sp(D[m].m)}</div><button class="big" data-a="1">👍 Juist</button><button class="big alt" data-a="0">👎 Fout</button><div id="msg"></div><div id="nxw"></div></div>`;
+ wire($('#app'));setTimeout(()=>speak(D[i].z+'. '+D[m].m),300);
+ document.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{const g=(b.dataset.a==='1')===ok;msg(g?'✅ Goed zo!':'❌ Nee. De juiste betekenis: '+D[i].m);speak(g?'Goed zo!':'Nee. De juiste betekenis is: '+D[i].m);document.querySelectorAll('[data-a]').forEach(x=>x.disabled=true);$('#nxw').innerHTML='<button class="big" id="nx">Volgende ➜</button>';$('#nx').onclick=juist})}
+
+/* ---------- NAV ---------- */
+const T=[['🧩 Koppelen',()=>{newRound();koppel()}],['👂 Luisteren',luister],['🃏 Memory',memory],['👍 Juist of fout',juist],['🎤 Nazeggen',nazeg]];
+function tab(k){speechSynthesis&&speechSynthesis.cancel();document.querySelectorAll('#nav button').forEach((b,j)=>b.classList.toggle('on',j===k));T[k][1]()}
+$('#nav').innerHTML=T.map((t,k)=>`<button>${t[0]}</button>`).join('');
+document.querySelectorAll('#nav button').forEach((b,k)=>b.onclick=()=>tab(k));
+tab(0);
+</script></body></html>
